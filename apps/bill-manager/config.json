@@ -1,0 +1,48 @@
+{
+  "name": "Budget Manager",
+  "id": "bill-manager",
+  "available": true,
+  "short_desc": "Self-hosted bill & budget manager with passkey sign-in.",
+  "description": "Track recurring bills, splits, debts, and savings goals across pay periods, with a bill-pay mode and balance tracking. Single shared database on the host (PGlite), gated by WebAuthn passkeys (YubiKey).",
+  "version": "latest",
+  "tipi_version": 1,
+  "min_tipi_version": "4.5.0",
+  "categories": ["finance"],
+  "author": "Jonathan Barnes",
+  "source": "https://github.com/JonB-Dev/bill-mgr",
+  "website": "https://github.com/JonB-Dev/bill-mgr",
+  "port": 5100,
+  "exposable": true,
+  "dynamic_config": true,
+  "supported_architectures": ["amd64"],
+  "form_fields": [
+    {
+      "type": "fqdn",
+      "label": "Public hostname (RP_ID)",
+      "hint": "The domain passkeys are bound to, e.g. budget.example.com",
+      "required": true,
+      "env_variable": "RP_ID"
+    },
+    {
+      "type": "url",
+      "label": "Public origin (RP_ORIGIN)",
+      "hint": "Full URL incl. https, e.g. https://budget.example.com",
+      "required": true,
+      "env_variable": "RP_ORIGIN"
+    },
+    {
+      "type": "password",
+      "label": "Registration secret",
+      "hint": "Set this to enroll a passkey, then clear it and update the app.",
+      "required": false,
+      "env_variable": "REGISTRATION_SECRET"
+    },
+    {
+      "type": "random",
+      "label": "Session secret",
+      "required": true,
+      "min": 48,
+      "env_variable": "SESSION_SECRET"
+    }
+  ]
+}
