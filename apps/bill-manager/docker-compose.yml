@@ -1,17 +1,16 @@
 services:
   bill-manager:
     image: ghcr.io/jonb-dev/bill-mgr:latest
+    restart: unless-stopped
+    environment:
+      - RP_ID=${RP_ID}
+      - RP_ORIGIN=${RP_ORIGIN}
+      - REGISTRATION_SECRET=${REGISTRATION_SECRET}
+    volumes:
+      - ${APP_DATA_DIR}/data:/app/data
     x-runtipi:
       is_main: true
       internal_port: 5100
-    environment:
-      RP_ID: ${RP_ID}
-      RP_ORIGIN: ${RP_ORIGIN}
-      REGISTRATION_SECRET: ${REGISTRATION_SECRET}
-      SESSION_SECRET: ${SESSION_SECRET}
-    volumes:
-      - ${APP_DATA_DIR}/data:/app/data
-    restart: unless-stopped
 
 x-runtipi:
   schema_version: 2
